@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .
+    ports:
+      - 8000:80
+    environment:
+      DB_HOST: db
+      DB_USER: sharepic
+      DB_PASS: redacted
+      DB_NAME: sharepic
+
+  db:
+    image: mariadb:11.3.2
+    environment:
+      MYSQL_ROOT_PASSWORD: redacted
+      MYSQL_DATABASE: sharepic
+      MYSQL_USER: sharepic
+      MYSQL_PASSWORD: redacted
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
